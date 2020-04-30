@@ -1,0 +1,8 @@
+D:\CoderDeckAzureFunction\WebHookProject\bin\Release\netstandard2.0\WebHookProject.deps.json
+D:\CoderDeckAzureFunction\WebHookProject\bin\Release\netstandard2.0\WebHookProject.dll
+D:\CoderDeckAzureFunction\WebHookProject\bin\Release\netstandard2.0\WebHookProject.pdb
+D:\CoderDeckAzureFunction\WebHookProject\obj\Release\netstandard2.0\WebHookProject.csproj.CoreCompileInputs.cache
+D:\CoderDeckAzureFunction\WebHookProject\obj\Release\netstandard2.0\WebHookProject.AssemblyInfoInputs.cache
+D:\CoderDeckAzureFunction\WebHookProject\obj\Release\netstandard2.0\WebHookProject.AssemblyInfo.cs
+D:\CoderDeckAzureFunction\WebHookProject\obj\Release\netstandard2.0\WebHookProject.dll
+D:\CoderDeckAzureFunction\WebHookProject\obj\Release\netstandard2.0\WebHookProject.pdb

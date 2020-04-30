@@ -1,0 +1,9 @@
+D:\CoderDeckAzureFunction\WebHookProject\bin\Release\netstandard2.0\DialogFlow.deps.json
+D:\CoderDeckAzureFunction\WebHookProject\bin\Release\netstandard2.0\DialogFlow.dll
+D:\CoderDeckAzureFunction\WebHookProject\bin\Release\netstandard2.0\DialogFlow.pdb
+D:\CoderDeckAzureFunction\WebHookProject\obj\Release\netstandard2.0\DialogFlow.csprojAssemblyReference.cache
+D:\CoderDeckAzureFunction\WebHookProject\obj\Release\netstandard2.0\DialogFlow.csproj.CoreCompileInputs.cache
+D:\CoderDeckAzureFunction\WebHookProject\obj\Release\netstandard2.0\DialogFlow.AssemblyInfoInputs.cache
+D:\CoderDeckAzureFunction\WebHookProject\obj\Release\netstandard2.0\DialogFlow.AssemblyInfo.cs
+D:\CoderDeckAzureFunction\WebHookProject\obj\Release\netstandard2.0\DialogFlow.dll
+D:\CoderDeckAzureFunction\WebHookProject\obj\Release\netstandard2.0\DialogFlow.pdb
