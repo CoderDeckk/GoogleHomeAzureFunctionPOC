@@ -14,6 +14,8 @@ using Google.Cloud.Dialogflow.V2;
 using Newtonsoft.Json.Linq;
 using System.Net.Http;
 using System.Net;
+using System.Net.Http.Headers;
+using System.Text;
 //using Google.Cloud.Dialogflow.V2;
 //using Google.Protobuf;
 
@@ -22,20 +24,14 @@ namespace CoderDeckAzureFunction
     public static class Function1
     {
         [FunctionName("Function1")]
-        public static async Task<HttpResponseMessage> Run(
+        public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequestMessage req,
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
             JsonParser jsonParser = new JsonParser(JsonParser.Settings.Default.WithIgnoreUnknownFields(true));
             string name = string.Empty;
-            WebhookRequest request;
-            //using (var reader = new StreamReader(req.Body))
-            //{
-            //StreamReader sr =  new StreamReader(req.Content.ReadAsStreamAsync().Result);
-            //log.LogInformation("My Body{0}", sr);
-            string s = "";
-            MyRequestBody body;
+            
             var response = req.Content.ReadAsStringAsync().Result;
             log.LogInformation("Got it" + response);
             var myParameters= response.ToString().Substring(response.ToString().IndexOf("parameters"));
@@ -44,26 +40,46 @@ namespace CoderDeckAzureFunction
               myParameters = myParameters.Substring(0, myParameters.IndexOf("}")+1);
             log.LogInformation("My Exact Parameters {0}", myParameters);
             myParameters = myParameters.Substring(myParameters.IndexOf("{"));
-            var myfinalResponse = JsonConvert.DeserializeObject<MyRequestBody>(myParameters);
-            log.LogInformation("Final name"+myfinalResponse.name);
+            var parametersObject = JsonConvert.DeserializeObject<MyRequestBody>(myParameters);
+            log.LogInformation("Final name"+ parametersObject.name);
             
            
             Appointment appointment = null;
             using (CoderDeckPocContext dbContext = new CoderDeckPocContext())
             {
-                appointment = dbContext.Appointment.Where(w => w.Email.Equals(myfinalResponse.name, StringComparison.InvariantCultureIgnoreCase) && w.AppointmentDate > DateTime.Now).OrderBy(o=>o.AppointmentDate).FirstOrDefault();
+                appointment = dbContext.Appointment.Where(w => w.UserId.ToString().Equals(parametersObject.name, StringComparison.InvariantCultureIgnoreCase) && w.AppointmentDate > DateTime.Now).OrderBy(o => o.AppointmentDate).FirstOrDefault();
             }
-
-            Response responseObject = new Response()
+            var dialogflowResponse = new WebhookResponse
             {
-                Source = "WebHook",
-                Speech = $"{ appointment.Appointment1} at {appointment.AppointmentDate}",
-                DisplayText = $"{ appointment.Appointment1} at {appointment.AppointmentDate}"
+                FulfillmentText = $"{ appointment?.Appointment1 } at { appointment?.AppointmentDate }",
+                FulfillmentMessages =
+                { new Intent.Types.Message
+                    { SimpleResponses = new Intent.Types.Message.Types.SimpleResponses
+                        { SimpleResponses_ =
+                            { new Intent.Types.Message.Types.SimpleResponse
+                                {
+                                   DisplayText = $"{ appointment?.Appointment1} at {appointment?.AppointmentDate}",
+                                   TextToSpeech = $"{ appointment?.Appointment1} at {appointment?.AppointmentDate}",
+                                   Ssml = $"<speak>{appointment?.Appointment1}</speak>"
+                                }
+                            }
+                        }
+                    }
+            }
             };
 
+            //Response responseObject = new Response()
+            //{
+            //    textToSpeech = $"{ appointment.Appointment1} at {appointment.AppointmentDate}",
+            //    displayText = $"{ appointment.Appointment1} at {appointment.AppointmentDate}",
+            //    ssml = string.Empty
+            //};
 
-                return req.CreateResponse(HttpStatusCode.OK,responseObject);
-             
+
+            //    return req.CreateResponse(HttpStatusCode.OK,responseObject);
+            var jsonResponse = dialogflowResponse.ToString();
+            return new ContentResult { Content = jsonResponse, ContentType = "application/json" };
+
         }
     }
     public class MyRequestBody
@@ -73,9 +89,9 @@ namespace CoderDeckAzureFunction
     }
     public class Response
     {
-        public string Speech { get; set; }
-        public string DisplayText { get; set; }
-        public string Source { get; set; }
+        public string textToSpeech { get; set; }
+        public string displayText { get; set; }
+        public string ssml { get; set; }
     }
 }
 

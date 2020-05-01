@@ -37,6 +37,7 @@ namespace CoderDeckServerlessPOC.Models
                 entity.Property(e => e.AppointmentDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Email).HasMaxLength(50);
+                entity.Property(e => e.UserId);
             });
         }
     }
