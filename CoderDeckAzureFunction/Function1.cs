@@ -34,10 +34,10 @@ namespace CoderDeckAzureFunction
             {
                 appointment = dbContext.Appointment.Where(w => w.Email.ToString().Equals(email, StringComparison.InvariantCultureIgnoreCase) && w.AppointmentDate > DateTime.Now).OrderBy(o => o.AppointmentDate).FirstOrDefault();
             }
-            string webHookResponse = "You dont have any upcoming appointment";
+            string webHookResponse = "You dont have any future appointment.Please check with the advisor";
             if (appointment != null)
             {
-                webHookResponse = appointment.Appointment1 + " at" + appointment.AppointmentDate;
+                webHookResponse = appointment.Appointment1 + " at" + appointment.AppointmentDate+"\n"+"Do you want to add note to this appointment?";
             }
                 return new ContentResult { Content = webHookResponse, ContentType = "application/json" };
 

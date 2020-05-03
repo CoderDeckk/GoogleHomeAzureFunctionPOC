@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CoderDeckAzureFunction;
+using CoderDeckAzureFunction.Models;
+using System;
 using System.Collections.Generic;
 
 namespace CoderDeckServerlessPOC.Models
@@ -10,5 +12,6 @@ namespace CoderDeckServerlessPOC.Models
         public DateTime? AppointmentDate { get; set; }
         public string Email { get; set; }
         public Guid UserId { get; set; }
+        public ICollection<AppointmentNotes> AppointmentNote { get; set; }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using CoderDeckAzureFunction;
+using CoderDeckAzureFunction.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -17,6 +19,7 @@ namespace CoderDeckServerlessPOC.Models
 
         public virtual DbSet<Appointment> Appointment { get; set; }
 
+        public virtual DbSet<AppointmentNotes> AppointmentNotes { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -39,6 +42,14 @@ namespace CoderDeckServerlessPOC.Models
                 entity.Property(e => e.Email).HasMaxLength(50);
                 entity.Property(e => e.UserId);
             });
+            modelBuilder.Entity<AppointmentNotes>(entity =>
+            {
+               
+                entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
+            });
+
         }
     }
 }

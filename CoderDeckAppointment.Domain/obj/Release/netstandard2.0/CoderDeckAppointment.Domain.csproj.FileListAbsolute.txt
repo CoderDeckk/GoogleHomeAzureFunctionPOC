@@ -1,0 +1,9 @@
+D:\CoderDeckAzureFunction\CoderDeckAppointment.Domain\bin\Release\netstandard2.0\CoderDeckAppointment.Domain.deps.json
+D:\CoderDeckAzureFunction\CoderDeckAppointment.Domain\bin\Release\netstandard2.0\CoderDeckAppointment.Domain.dll
+D:\CoderDeckAzureFunction\CoderDeckAppointment.Domain\obj\Release\netstandard2.0\CoderDeckAppointment.Domain.csproj.CoreCompileInputs.cache
+D:\CoderDeckAzureFunction\CoderDeckAppointment.Domain\obj\Release\netstandard2.0\CoderDeckAppointment.Domain.AssemblyInfoInputs.cache
+D:\CoderDeckAzureFunction\CoderDeckAppointment.Domain\obj\Release\netstandard2.0\CoderDeckAppointment.Domain.AssemblyInfo.cs
+D:\CoderDeckAzureFunction\CoderDeckAppointment.Domain\bin\Release\netstandard2.0\CoderDeckAppointment.Domain.pdb
+D:\CoderDeckAzureFunction\CoderDeckAppointment.Domain\obj\Release\netstandard2.0\CoderDeckAppointment.Domain.dll
+D:\CoderDeckAzureFunction\CoderDeckAppointment.Domain\obj\Release\netstandard2.0\CoderDeckAppointment.Domain.pdb
+D:\CoderDeckAzureFunction\CoderDeckAppointment.Domain\obj\Release\netstandard2.0\CoderDeckAppointment.Domain.csprojAssemblyReference.cache
