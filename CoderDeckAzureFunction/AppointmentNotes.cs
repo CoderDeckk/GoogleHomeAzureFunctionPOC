@@ -30,7 +30,7 @@ namespace CoderDeckAzureFunction
             using (CoderDeckPocContext dbContext = new CoderDeckPocContext())
             {
                  appointment = dbContext.Appointment.Where(w => w.Email.Equals(email, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-                log.LogInformation("Appoint data is"+JsonConvert.SerializeObject(appointment));
+                log.LogInformation("Appointment data is"+JsonConvert.SerializeObject(appointment));
                 if (appointment != null)
                 {
                     AppointmentNotes appointmentNotes = new AppointmentNotes()
@@ -38,8 +38,10 @@ namespace CoderDeckAzureFunction
                         AppointmentId = appointment.Id,
                         Notes = notes,
                         CreatedBy = email,
+                        CreatedOn=DateTime.Now
                     };
 
+                   
                     dbContext.Add<AppointmentNotes>(appointmentNotes);
                     dbContext.SaveChanges();
                 }

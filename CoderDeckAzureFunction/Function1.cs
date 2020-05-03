@@ -30,14 +30,25 @@ namespace CoderDeckAzureFunction
             log.LogInformation("Email Is" + req.Query["email"]);
 
             Appointment appointment = null;
+            string releaseNote = string.Empty;
             using (CoderDeckPocContext dbContext = new CoderDeckPocContext())
             {
                 appointment = dbContext.Appointment.Where(w => w.Email.ToString().Equals(email, StringComparison.InvariantCultureIgnoreCase) && w.AppointmentDate > DateTime.Now).OrderBy(o => o.AppointmentDate).FirstOrDefault();
+                var appontmentNotes = dbContext.AppointmentNotes.Where(w => w.AppointmentId == appointment.Id).OrderByDescending(w => w.CreatedOn).FirstOrDefault();
+
+                releaseNote = appontmentNotes?.Notes;
             }
             string webHookResponse = "You dont have any future appointment.Please check with the advisor";
             if (appointment != null)
             {
-                webHookResponse = appointment.Appointment1 + " at" + appointment.AppointmentDate+"\n"+"Do you want to add note to this appointment?";
+                if (releaseNote == null)
+                {
+                    webHookResponse = appointment.Appointment1 + " at" + appointment.AppointmentDate + "\n" + "Do you want to add note to this appointment?";
+                }
+                else
+                {
+                    webHookResponse = appointment.Appointment1 + " at" + appointment.AppointmentDate+"\n Latest note on this appointment\n"+releaseNote + "\n" + "Do you want to add more notes to this appointment?";
+                }
             }
                 return new ContentResult { Content = webHookResponse, ContentType = "application/json" };
 

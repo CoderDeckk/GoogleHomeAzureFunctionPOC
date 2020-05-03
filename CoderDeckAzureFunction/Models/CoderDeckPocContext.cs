@@ -25,7 +25,7 @@ namespace CoderDeckServerlessPOC.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=tcp:coderdeckserver.database.windows.net,1433;User ID=coderdeck@gmail.com@coderdeckserver;password=Jdvc@2016;Database=CoderDeckPoc;Trusted_Connection=False;Encrypt=True;");
+                optionsBuilder.UseSqlServer("Server=tcp:kmazurelearningsqlserver.database.windows.net,1433;Initial Catalog=CoderDeckPoc;Persist Security Info=False;User ID=kmazurelearning;Password=AzureTemp@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
 
